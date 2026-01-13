@@ -5,31 +5,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="2Q Portfolio, Projects, Web Development">
     <meta name="author" content="TUMBAGA, Rea Xyrille D.">
-<body>
-    <form action="somepage.html">
-        
-        <label for="StudentID">Student ID:</label><br/>
-        <input type="number" id="StudentID" name="StudentID">
 
-        <label for="FullName">Full Name:</label><br/>
-        <input type="text" id="FullName" name="FullName">
+    <title>Club Application Form</title>
 
-        <label for="Birthday">Birthday:</label><br/>
-        <input type="date" id="Birthday" name="Birthday">
+    <style>
+        body {
+            background: linear-gradient(to right, blue, red);
+            font-family: Arial, sans-serif;
+        }
 
-        <label for="EmailAddress">Email address:</label><br/>
-        <input type="email" id="EmailAddress" name="EmailAddress">
+        form {
+            background-color: rgb(255, 217, 161);
+            width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
 
-        <label for="MobilePhone">Mobile phone:</label><br/>
-        <input type="type" id="MobilePhone" name="MobilePhone">
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
 
-        <label for="GradeLevel">Grade Level :</label><br/>
-        <select id="GradeLevel" id="GradeLevel" name="GradeLevel">
-        
-        <label for="GradeLevel">Grade Level :</label><br/>
-        <input id="GradeLevel" id="GradeLevel" name="GradeLevel">
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+        }
 
+        input:focus, select:focus, textarea:focus {
+            background-color: #98bada;
+            border: 2px solid rgb(90, 90, 145);
+        }
 
-    </form>
-</body>
+        .invalid {
+            border: 2px solid red;
+            background-color: #ffe6e6;
+        }
+    </style>
+
+    <script>
+        function confirmSubmit() {
+            return confirm("Do you want to submit this form?");
+        }
+
+        function confirmReset() {
+            return confirm("Do you want to reset the form?");
+        }
+
+        function checkInput(x) {
+            if (x.value.trim() === "") {
+                x.classList.add("invalid");
+            } else {
+                x.classList.remove("invalid");
+            }
+        }
+    </script>
 </head>
+
+<body>
+
+<form method="post" action="submit" onsubmit="return confirmSubmit()" onreset="return confirmReset()">
+
+    <fieldset>
+        <legend>Personal Information</legend>
+
+        <label>
+            Student ID:
+            <input type="number" name="StudentID" required onblur="checkInput(this)">
+        </label>
+
+        <label>
+            Full Name:
+            <input type="text" name="FullName" required onblur="checkInput(this)">
+        </label>
+
+        <label>
+            Birthday:
+            <input type="date" name="Birthday" required onblur="checkInput(this)">
+        </label>
+
+        <label>
+            Email Address:
+            <input type="email" name="Email" required onblur="checkInput(this)">
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Application Details</legend>
+
+        <label>
+            Mobile Phone:
+            <input type="text" name="Mobile" required onblur="checkInput(this)">
+        </label>
+
+        <label>
+            Grade Level:
+            <select name="Grade" required>
+                <option value="">Select</option>
+                <option value="g7">Grade 7</option>
+                <option value="g8">Grade 8</option>
+                <option value="g9">Grade 9</option>
+                <option value="g10">Grade 10</option>
+                <option value="g11">Grade 11</option>
+                <option value="g12">Grade 12</option>
+            </select>
+        </label>
+
+        <label>
+            Intern / Extern:
+            <input type="radio" name="Status" value="intern" required> Intern
+            <input type="radio" name="Status" value="extern" required> Extern
+        </label>
+
+        <label>
+            Preferred Organization / Club:
+            <select name="Club" required>
+                <option value="">Select</option>
+                <option value="mun">PisayMUN-MC</option>
+                <option value="kamalayan">Kamalayan</option>
+                <option value="sightlines">Sightlines</option>
+                <option value="math">Math Club</option>
+                <option value="celluloid">Celluloid</option>
+                <option value="aksis">Aksis</option>
+            </select>
+        </label>
+
+        <label>
+            Why do you want to join?
+            <textarea name="Reason" required onblur="checkInput(this)"></textarea>
+        </label>
+    </fieldset>
+
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+
+</form>
+
+</body>
+</html>
