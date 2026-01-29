@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="2Q Portfolio, Projects, Web Development">
+    <meta name="author" content="TUMBAGA, Rea Xyrille D.">
+    <title>Tumbaga's 2nd Quarter Portfolio</title>
+    
+    <link rel="icon" href="/assets/image_logo.png" sizes="32x32" type="image/png">
+    <link rel="stylesheet" href="./2Q2GShared.css"> 
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, 
+                #000000 0%,
+                #FF0000 50%,
+                #000000 100%
+            ); 
+            min-height: 100vh;
+            display: grid; 
+            grid-template-columns: 280px 1fr;
+            color: #fff;
+        }
+        
+        header, main {
+            background: transparent;
+            color: #fff;
+        }
+
+        header {
+            grid-column: 1 / 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 10px;
+            background: #000000; 
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5); 
+        }
+        
+        .header-content-flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding-bottom: 30px; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+            width: 100%;
+        }
+
+        .header-icon {
+            height: 60px;
+            width: auto;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+        }
+
+        h1 {
+            font-size: 1.2em;
+            margin: 0;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        nav ul {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            padding: 0;
+            gap: 0; 
+        }
+
+        nav li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            display: block; 
+            padding: 15px 20px;
+            transition: background-color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1); 
+        }
+        
+        main {
+            grid-column: 2 / 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .main-title { 
+            font-size: 4em;
+            color: #fff;
+            margin-bottom: 0;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .main-subtitle {
+            display: none;
+        }
+
+        footer {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="index-header">
+        <div class="header-content-flex"> 
+            <img src="/assets/image_logo.png" alt="Icon" class="header-icon">
+            <h1>Access my works here:</h1>
+        </div>
+        <nav>
+            <ul class="index-nav">
+            <li>
+                <a href="./public/Q2/index.html" data-desc="Quarter 2 Portfolio">
+                    QUARTER 2
+                </a>
+            </li>
+        
+            <li>
+                <a href="./public/Q3/index.html" data-desc="Quarter 3 Portfolio">
+                    QUARTER 3
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    </header>
+
+    <main>
+        <h2 class="main-title">My SY 2025-2026 Web Development Portfolio</h2> 
+        <h2>"Have a Big Mind and a Bigger Heart"</h2>
+    </main>
+    
+</body>
+</html>

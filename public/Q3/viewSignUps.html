@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>View Club Signups</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        min-height: 100vh;
+        padding: 40px;
+
+        background:
+            radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 40%),
+            radial-gradient(circle at 80% 70%, rgba(255,255,255,0.06), transparent 45%),
+            conic-gradient(from 180deg at 50% 50%,
+                rgba(255,255,255,0.05),
+                transparent,
+                rgba(255,255,255,0.05),
+                transparent
+            ),
+            linear-gradient(135deg, #0f2027, #2c5364, #5b2b82);
+        background-attachment: fixed;
+    }
+
+    .container {
+        background: white;
+        color: black;
+        padding: 20px;
+        border-radius: 12px;
+        max-width: 900px;
+        margin: auto;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+        text-align: center;
+        color: #2c5364;
+    }
+
+    select {
+        padding: 6px;
+        margin: 10px 0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        background: #2c5364;
+        color: white;
+    }
+
+    .message {
+        margin-top: 15px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    a {
+        display: inline-block;
+        margin-top: 15px;
+        text-decoration: none;
+        color: #5b2b82;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+let allSignups = JSON.parse(localStorage.getItem("clubSignups")) || [];
+
+function displaySignups() {
+    let club = document.getElementById("clubFilter").value;
+    let tableBody = document.getElementById("tableBody");
+    let message = document.getElementById("message");
+
+    tableBody.innerHTML = "";
+    message.textContent = "";
+
+    if (allSignups.length === 0) {
+        message.textContent = "No sign-ups saved yet.";
+        document.getElementById("total").textContent = 0;
+        return;
+    }
+
+    let filtered = club === "ALL"
+        ? allSignups
+        : allSignups.filter(s => s.clubId === club);
+
+    if (filtered.length === 0) {
+        message.textContent = "No sign-ups for the selected club.";
+    }
+
+    filtered.forEach(s => {
+        let row = `
+            <tr>
+                <td>${s.clubName || s.club || "—"}</td>
+                <td>${s.id}</td>
+                <td>${s.fullname}</td>
+                <td>${s.grade}</td>
+                <td>${s.email}</td>
+                <td>${s.mobile}</td>
+                <td>${s.status}</td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+
+    document.getElementById("total").textContent = filtered.length;
+}
+
+window.onload = displaySignups;
+</script>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Show List of Students Who Signed-Up</h2>
+
+    <label>Select Your Club:
+        <select id="clubFilter" onchange="displaySignups()">
+            <option value="ALL">ALL</option>
+            <option value="mun">PisayMUN-MC</option>
+            <option value="kamalayan">Kamalayan</option>
+            <option value="sightlines">Sightlines</option>
+            <option value="math">Math Club</option>
+            <option value="celluloid">Celluloid</option>
+            <option value="aksis">Aksis</option>
+        </select>
+    </label>
+
+    <p>Total Signup: <span id="total">0</span></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Club</th>
+                <th>ID</th>
+                <th>Fullname</th>
+                <th>Grade</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Intern | Extern</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <div id="message" class="message"></div>
+
+    <a href="Q3_2GLiTumbaga.html">← Back to Signup</a>
+</div>
+
+</body>
+</html>

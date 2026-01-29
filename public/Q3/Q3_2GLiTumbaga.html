@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="TUMBAGA, Rea Xyrille D.">
+<title>Club Application Form</title>
+
+<style>
+    * {
+       box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        min-height: 100vh;
+        padding: 40px;
+
+        background:
+            radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 40%),
+            radial-gradient(circle at 80% 70%, rgba(255,255,255,0.06), transparent 45%),
+            conic-gradient(from 180deg at 50% 50%,
+                rgba(255,255,255,0.05),
+                transparent,
+                rgba(255,255,255,0.05),
+                transparent
+            ),
+            linear-gradient(135deg, #0f2027, #2c5364, #5b2b82);
+        background-attachment: fixed;
+    }
+
+    form {
+        background: #ffffff;
+        width: 540px;
+        margin: auto;
+        padding: 25px;
+        border-radius: 14px;
+        box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+    }
+
+    h2 {
+        text-align: center;
+        color: #2c5364;
+        margin-bottom: 15px;
+    }
+
+    fieldset {
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border: 2px solid #5b2b82;
+        padding: 15px;
+    }
+
+    legend {
+        font-weight: bold;
+        color: #5b2b82;
+        padding: 0 6px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 6px;
+        border-radius: 8px;
+        border: 1px solid #aaa;
+        font-size: 14px;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #5b2b82;
+        box-shadow: 0 0 6px rgba(91,43,130,0.5);
+    }
+
+    /* Radio button layout fix */
+    .radio-group {
+        display: flex;
+        gap: 25px;
+        margin-top: 8px;
+    }
+
+    .radio-group label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .radio-group input {
+        width: auto;
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+
+    select.club-select {
+        transition: box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .club-mun { border-color: #1e88e5; box-shadow: 0 0 8px #1e88e5; }
+    .club-kamalayan { border-color: #43a047; box-shadow: 0 0 8px #43a047; }
+    .club-sightlines { border-color: #fb8c00; box-shadow: 0 0 8px #fb8c00; }
+    .club-math { border-color: #8e24aa; box-shadow: 0 0 8px #8e24aa; }
+    .club-celluloid { border-color: #e53935; box-shadow: 0 0 8px #e53935; }
+    .club-aksis { border-color: #00897b; box-shadow: 0 0 8px #00897b; }
+
+    .buttons {
+        text-align: center;
+        margin-top: 18px;
+    }
+
+    button {
+        padding: 10px 20px;
+        margin: 6px;
+        border-radius: 10px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .submit-btn { background: #5b2b82; color: white; }
+    .reset-btn { background: #999; color: white; }
+    .view-btn { background: #2c5364; color: white; }
+</style>
+
+<script>
+function saveSignup(e) {
+    e.preventDefault();
+    if (!confirm("Do you want to submit this form?")) return;
+
+    let signup = {
+        id: StudentID.value,
+        fullname: FullName.value,
+        birthday: Birthday.value,
+        email: Email.value,
+        mobile: Mobile.value,
+        grade: Grade.value,
+        status: document.querySelector("input[name=Status]:checked").value,
+        clubId: Club.value,
+        clubName: Club.options[Club.selectedIndex].text,
+        reason: Reason.value
+    };
+
+    let signups = JSON.parse(localStorage.getItem("clubSignups")) || [];
+    signups.push(signup);
+    localStorage.setItem("clubSignups", JSON.stringify(signups));
+
+    alert("Signup saved!");
+    document.querySelector("form").reset();
+    Club.className = "club-select";
+}
+
+/* Change dropdown outline based on club */
+function updateClubStyle(sel) {
+    sel.className = "club-select club-" + sel.value;
+}
+</script>
+</head>
+
+<body>
+
+<form onsubmit="saveSignup(event)">
+<h2>Club Application Form</h2>
+
+<fieldset>
+<legend>Personal Information</legend>
+
+<label>Student ID
+<input type="number" id="StudentID" required></label>
+
+<label>Full Name
+<input type="text" id="FullName" required></label>
+
+<label>Birthday
+<input type="date" id="Birthday" required></label>
+
+<label>Email Address
+<input type="email" id="Email" required></label>
+</fieldset>
+
+<fieldset>
+<legend>Application Details</legend>
+
+<label>Mobile Phone
+<input type="text" id="Mobile" required></label>
+
+<label>Grade Level
+<select id="Grade" required>
+<option value="">Select</option>
+<option>Grade 7</option>
+<option>Grade 8</option>
+<option>Grade 9</option>
+<option>Grade 10</option>
+<option>Grade 11</option>
+<option>Grade 12</option>
+</select>
+</label>
+
+<label>Intern / Extern</label>
+<div class="radio-group">
+<label><input type="radio" name="Status" value="Intern" required> Intern</label>
+<label><input type="radio" name="Status" value="Extern"> Extern</label>
+</div>
+
+<label>Preferred Club
+<select id="Club" class="club-select" onchange="updateClubStyle(this)" required>
+<option value="">Select</option>
+<option value="mun">PisayMUN-MC</option>
+<option value="kamalayan">Kamalayan</option>
+<option value="sightlines">Sightlines</option>
+<option value="math">Math Club</option>
+<option value="celluloid">Celluloid</option>
+<option value="aksis">Aksis</option>
+</select>
+</label>
+
+<label>Why do you want to join?
+<textarea id="Reason" required></textarea>
+</label>
+</fieldset>
+
+<div class="buttons">
+<button type="submit" class="submit-btn">Submit</button>
+<button type="reset" class="reset-btn">Reset</button>
+<button type="button" class="view-btn" onclick="location.href='viewSignUps.html'">View Signups</button>
+</div>
+</form>
+
+</body>
+</html>

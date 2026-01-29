@@ -1,152 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="2Q Portfolio, Projects, Web Development">
-    <meta name="author" content="TUMBAGA, Rea Xyrille D.">
-    <title>Tumbaga's 2nd Quarter Portfolio</title>
-    
-    <link rel="icon" href="/assets/image_logo.png" sizes="32x32" type="image/png">
-    <link rel="stylesheet" href="./2Q2GShared.css"> 
-    
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom, 
-                #000000 0%,
-                #FF0000 50%,
-                #000000 100%
-            ); 
-            min-height: 100vh;
-            display: grid; 
-            grid-template-columns: 280px 1fr;
-            color: #fff;
-        }
-        
-        header, main {
-            background: transparent;
-            color: #fff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="TUMBAGA, Rea Xyrille D.">
+<title>Quarter 2 Portfolio</title>
 
-        header {
-            grid-column: 1 / 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 10px;
-            background: #000000; 
-            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5); 
-        }
-        
-        .header-content-flex {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            padding-bottom: 30px; 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
-            width: 100%;
-        }
+<link rel="icon" href="/assets/image_logo.png">
 
-        .header-icon {
-            height: 60px;
-            width: auto;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
-        }
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
-        h1 {
-            font-size: 1.2em;
-            margin: 0;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+<style>
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    font-family: 'Orbitron', sans-serif;
 
-        nav {
-            margin-top: 30px;
-            width: 100%;
-        }
+    /* RED–BLACK ARCADE BACKGROUND */
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05), transparent 45%),
+        conic-gradient(from 180deg at 50% 50%,
+            rgba(255,0,0,0.08),
+            transparent,
+            rgba(255,0,0,0.08),
+            transparent
+        ),
+        linear-gradient(to bottom,
+            #000000 0%,
+            #ff0000 50%,
+            #000000 100%
+        );
 
-        nav ul {
-            display: flex;
-            flex-direction: column;
-            list-style: none;
-            padding: 0;
-            gap: 0; 
-        }
+    color: white;
+}
 
-        nav li {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+/* SIDEBAR */
+header {
+    background: rgba(0,0,0,0.85);
+    padding: 40px 15px;
+    box-shadow: 4px 0 12px rgba(0,0,0,0.6);
+}
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1em;
-            display: block; 
-            padding: 15px 20px;
-            transition: background-color 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+header h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1em;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ff4d4d;
+    text-shadow: 0 0 8px rgba(255,0,0,0.6);
+}
 
-        nav a:hover {
-            background-color: rgba(255, 255, 255, 0.1); 
-        }
-        
-        main {
-            grid-column: 2 / 3;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            width: 100%;
-            min-height: 100vh;
-        }
+/* NAV */
+nav a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    transition: background 0.3s ease;
+}
 
-        .main-title { 
-            font-size: 4em;
-            color: #fff;
-            margin-bottom: 0;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-        }
+nav a:hover {
+    background: rgba(255,255,255,0.12);
+}
 
-        .main-subtitle {
-            display: none;
-        }
+/* MAIN */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-        footer {
-            display: none;
-        }
-
-    </style>
+.main-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5em;
+    line-height: 1.4;
+    color: #ffffff;
+    text-shadow:
+        0 0 10px rgba(255,0,0,0.7),
+        0 0 25px rgba(255,0,0,0.4);
+}
+</style>
 </head>
-<body>
-    <header class="index-header">
-        <div class="header-content-flex"> 
-            <img src="/assets/image_logo.png" alt="Icon" class="header-icon">
-            <h1>Access my works here:</h1>
-        </div>
-        <nav>
-            <ul class="index-nav">
-                <li> <a href="./2Q1LithiumTumbaga.html" data-desc="First Graded Work"> FIRST GRADED </a> </li>
-                <li> <a href = "./Q21NGLithiumTumbaga.html" data-desc="First Non-graded"> FIRST NON-GRADED </a> </li>
-                <li> <a href = "./2Q2LithiumTumbaga.html" data-desc="Second Graded Work"> SECOND GRADED </a> </li>
-                <li> <a href = "https://drijbl.github.io/WDProjLithiumGabrielTumbaga/index.html" data-desc="Final Group Project Link"> ACCESS TO OUR PROJECT </a> </li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <h2 class="main-title">My 2nd Quarter Portfolio</h2> 
-        <h2>"Have a Big Mind and a Bigger Heart"</h2>
-    </main>
-    
+<body>
+
+<header>
+    <h1>Quarter 2</h1>
+    <nav>
+        <a href="./2Q1LithiumTumbaga.html">First Graded Work</a>
+        <a href="./Q21NGLithiumTumbaga.html">First Non-Graded</a>
+        <a href="./2Q2LithiumTumbaga.html">Second Graded Work</a>
+        <a href="/index.html">← Back Home</a>
+    </nav>
+</header>
+
+<main>
+    <h2 class="main-title">
+        QUARTER 2<br>
+        PORTFOLIO
+    </h2>
+</main>
+
 </body>
 </html>
