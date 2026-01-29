@@ -5,22 +5,20 @@
 <title>View Club Signups</title>
 
 <style>
+    html {
+        min-height: 100%;
+        background:
+            radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 40%),
+            radial-gradient(circle at 80% 70%, rgba(255,255,255,0.06), transparent 45%),
+            linear-gradient(135deg, #0f2027, #2c5364, #5b2b82);
+    }
+
+    
     body {
         font-family: Arial, sans-serif;
         min-height: 100vh;
         padding: 40px;
-
-        background:
-            radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 40%),
-            radial-gradient(circle at 80% 70%, rgba(255,255,255,0.06), transparent 45%),
-            conic-gradient(from 180deg at 50% 50%,
-                rgba(255,255,255,0.05),
-                transparent,
-                rgba(255,255,255,0.05),
-                transparent
-            ),
-            linear-gradient(135deg, #0f2027, #2c5364, #5b2b82);
-        background-attachment: fixed;
+        background: transparent;
     }
 
     .container {
@@ -76,6 +74,7 @@
 </style>
 
 <script>
+// Load saved signups from localStorage
 let allSignups = JSON.parse(localStorage.getItem("clubSignups")) || [];
 
 function displaySignups() {
@@ -83,27 +82,32 @@ function displaySignups() {
     let tableBody = document.getElementById("tableBody");
     let message = document.getElementById("message");
 
+    // Reset table and messages every refresh
     tableBody.innerHTML = "";
     message.textContent = "";
 
+    // If no signups exist at all
     if (allSignups.length === 0) {
         message.textContent = "No sign-ups saved yet.";
         document.getElementById("total").textContent = 0;
         return;
     }
 
+    // Filter based on club selection
     let filtered = club === "ALL"
         ? allSignups
         : allSignups.filter(s => s.clubId === club);
 
+    // If selected club has no signups
     if (filtered.length === 0) {
         message.textContent = "No sign-ups for the selected club.";
     }
 
+    // Display each signup as a table row
     filtered.forEach(s => {
-        let row = `
+        tableBody.innerHTML += `
             <tr>
-                <td>${s.clubName || s.club || "—"}</td>
+                <td>${s.clubName || s.clubId}</td>
                 <td>${s.id}</td>
                 <td>${s.fullname}</td>
                 <td>${s.grade}</td>
@@ -112,14 +116,16 @@ function displaySignups() {
                 <td>${s.status}</td>
             </tr>
         `;
-        tableBody.innerHTML += row;
     });
 
+    // Total count
     document.getElementById("total").textContent = filtered.length;
 }
 
+// Show all signups immediately when page loads
 window.onload = displaySignups;
 </script>
+
 </head>
 
 <body>
