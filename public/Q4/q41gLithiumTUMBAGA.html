@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<!-- Basic page setup -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Movie Tracker</title>
-
+<meta name="author" content="TUMBAGA, Rea Xyrille D.">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -25,6 +27,7 @@ body{
     color:white;
 }
 
+/* container for the movie form and list */
 .container{
     background:rgba(0,0,0,0.85);
     padding:30px;
@@ -66,6 +69,7 @@ button:hover{
     background:#b81f75;
 }
 
+/* star rating styling */
 .stars{
     font-size:26px;
     text-align:center;
@@ -82,6 +86,7 @@ button:hover{
     color:#ffd700;
 }
 
+/* movie display box */
 .movie{
     background:rgba(255,255,255,0.12);
     padding:12px 14px;
@@ -107,9 +112,13 @@ button:hover{
 
 <h2>Add Movie</h2>
 
+<!-- movie title input -->
 <input id="title" placeholder="Movie Title">
+
+<!-- movie year input -->
 <input id="year" type="number" placeholder="Year">
 
+<!-- dropdown to select movie genre -->
 <select id="genre">
 <option value="">-- Choose a genre --</option>
 <option>Action</option>
@@ -118,6 +127,7 @@ button:hover{
 <option>Sci-Fi</option>
 </select>
 
+<!-- clickable star rating -->
 <div class="stars" id="stars">
 <span data="1">★</span>
 <span data="2">★</span>
@@ -126,6 +136,7 @@ button:hover{
 <span data="5">★</span>
 </div>
 
+<!-- button that adds the movie -->
 <button onclick="addMovie()">Add Movie</button>
 
 <h2>Movie List</h2>
@@ -135,7 +146,9 @@ button:hover{
 
 <script>
 
+/* sets and stores the selected star rating */
 let rating = 0
+
 const stars = document.querySelectorAll("#stars span")
 
 stars.forEach(s=>{
@@ -151,37 +164,47 @@ function updateStars(){
     })
 }
 
+/* function to add a movie and save it */
 function addMovie(){
 
+    // get values from the form
     const title = document.getElementById("title").value
     const year = document.getElementById("year").value
     const genre = document.getElementById("genre").value
 
+    // check if all fields are filled
     if(!title || !year || !genre || rating==0){
         alert("Fill all fields")
         return
     }
 
+    /* retrieve existing movies from localStorage or create empty array if none exist */
     const movies = JSON.parse(localStorage.getItem("movies") || "[]")
 
+    // add the new movie as a JS object
     movies.push({title,year,genre,rating})
 
+    // save updated movie list back to localStorage
     localStorage.setItem("movies", JSON.stringify(movies))
 
+    // clear the form after adding
     document.getElementById("title").value=""
     document.getElementById("year").value=""
     document.getElementById("genre").value=""
+
     rating=0
     updateStars()
 
     render()
 }
 
+/* displays all saved movies on the page */
 function render(){
 
     const movies = JSON.parse(localStorage.getItem("movies") || "[]")
     const list = document.getElementById("list")
 
+    // convert movie objects into HTML
     list.innerHTML = movies.map(m => `
         <div class="movie">
         ${m.title} (${m.year}) - ${m.genre}, Rating: 
