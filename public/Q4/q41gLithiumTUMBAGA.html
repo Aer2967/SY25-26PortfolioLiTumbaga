@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Tracker</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Orbitron', sans-serif;
+
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.06), transparent 45%),
+        linear-gradient(135deg, #d3238a, #e77f3a, #5b2686);
+
+    color:white;
+}
+
+.container{
+    background:rgba(0,0,0,0.85);
+    padding:30px;
+    border-radius:10px;
+    width:420px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.6);
+}
+
+h2{
+    text-align:center;
+    font-family:'Press Start 2P', cursive;
+    font-size:1em;
+    margin-bottom:20px;
+}
+
+input, select{
+    width:100%;
+    padding:10px 12px;
+    margin-bottom:14px;
+    border-radius:5px;
+    border:none;
+    font-family:'Orbitron', sans-serif;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:11px;
+    border:none;
+    border-radius:5px;
+    background:#d3238a;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+button:hover{
+    background:#b81f75;
+}
+
+.stars{
+    font-size:26px;
+    text-align:center;
+    margin-bottom:18px;
+}
+
+.stars span{
+    color:#777;
+    cursor:pointer;
+    margin:0 3px;
+}
+
+.stars .active{
+    color:#ffd700;
+}
+
+.movie{
+    background:rgba(255,255,255,0.12);
+    padding:12px 14px;
+    border-radius:6px;
+    margin-bottom:10px;
+    line-height:1.5;
+}
+
+.rating{
+    color:#ffd700;
+}
+
+#list{
+    margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Add Movie</h2>
+
+<input id="title" placeholder="Movie Title">
+<input id="year" type="number" placeholder="Year">
+
+<select id="genre">
+<option value="">-- Choose a genre --</option>
+<option>Action</option>
+<option>Comedy</option>
+<option>Drama</option>
+<option>Sci-Fi</option>
+</select>
+
+<div class="stars" id="stars">
+<span data="1">★</span>
+<span data="2">★</span>
+<span data="3">★</span>
+<span data="4">★</span>
+<span data="5">★</span>
+</div>
+
+<button onclick="addMovie()">Add Movie</button>
+
+<h2>Movie List</h2>
+<div id="list"></div>
+
+</div>
+
+<script>
+
+let rating = 0
+const stars = document.querySelectorAll("#stars span")
+
+stars.forEach(s=>{
+    s.onclick=()=>{
+        rating = s.getAttribute("data")
+        updateStars()
+    }
+})
+
+function updateStars(){
+    stars.forEach(s=>{
+        s.classList.toggle("active", s.getAttribute("data") <= rating)
+    })
+}
+
+function addMovie(){
+
+    const title = document.getElementById("title").value
+    const year = document.getElementById("year").value
+    const genre = document.getElementById("genre").value
+
+    if(!title || !year || !genre || rating==0){
+        alert("Fill all fields")
+        return
+    }
+
+    const movies = JSON.parse(localStorage.getItem("movies") || "[]")
+
+    movies.push({title,year,genre,rating})
+
+    localStorage.setItem("movies", JSON.stringify(movies))
+
+    document.getElementById("title").value=""
+    document.getElementById("year").value=""
+    document.getElementById("genre").value=""
+    rating=0
+    updateStars()
+
+    render()
+}
+
+function render(){
+
+    const movies = JSON.parse(localStorage.getItem("movies") || "[]")
+    const list = document.getElementById("list")
+
+    list.innerHTML = movies.map(m => `
+        <div class="movie">
+        ${m.title} (${m.year}) - ${m.genre}, Rating: 
+        <span class="rating">${"★".repeat(m.rating)}</span>
+        </div>
+    `).join("")
+}
+
+render()
+
+</script>
+
+</body>
+</html>
