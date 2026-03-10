@@ -93,10 +93,27 @@ button:hover{
     border-radius:6px;
     margin-bottom:10px;
     line-height:1.5;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
 }
 
 .rating{
     color:#ffd700;
+}
+
+.deleteBtn{
+    width:auto;
+    padding:5px 10px;
+    font-size:12px;
+    margin:0;
+    background:#444;
+}
+
+.deleteBtn:hover{
+    background:#666;
 }
 
 #list{
@@ -167,27 +184,42 @@ function updateStars(){
 /* function to add a movie and save it */
 function addMovie(){
 
-    // get values from the form
     const title = document.getElementById("title").value
     const year = document.getElementById("year").value
     const genre = document.getElementById("genre").value
 
-    // check if all fields are filled
     if(!title || !year || !genre || rating==0){
         alert("Fill all fields")
         return
     }
 
-    /* retrieve existing movies from localStorage or create empty array if none exist */
     const movies = JSON.parse(localStorage.getItem("movies") || "[]")
 
-    // add the new movie as a JS object
-    movies.push({title,year,genre,rating})
+    // check if movie already exists
+    const index = movies.findIndex(m => m.title.toLowerCase() === title.toLowerCase())
 
-    // save updated movie list back to localStorage
+    if(index !== -1){
+
+        // average the ratings
+        const oldRating = Number(movies[index].rating)
+        const newRating = Number(rating)
+        const avgRating = (oldRating + newRating) / 2
+
+        movies[index] = {
+            title,
+            year,
+            genre,
+            rating: avgRating
+        }
+
+    }else{
+
+        movies.push({title,year,genre,rating})
+
+    }
+
     localStorage.setItem("movies", JSON.stringify(movies))
 
-    // clear the form after adding
     document.getElementById("title").value=""
     document.getElementById("year").value=""
     document.getElementById("genre").value=""
@@ -198,17 +230,44 @@ function addMovie(){
     render()
 }
 
+/* function to delete a movie from the list */
+function deleteMovie(index){
+
+    const confirmDelete = confirm("Are you sure you want to delete this movie?")
+
+    if(confirmDelete){
+
+        const movies = JSON.parse(localStorage.getItem("movies") || "[]")
+
+        movies.splice(index,1)
+
+        localStorage.setItem("movies", JSON.stringify(movies))
+
+        render()
+
+    }
+}
+
+/* converts the rating to star symbols (e.g. 3.5 -> "★★★½") */
+function getStars(rating){
+
+    const fullStars = Math.floor(rating)
+    const halfStar = rating % 1 >= 0.5 ? "½" : ""
+
+    return "★".repeat(fullStars) + halfStar
+}
+
 /* displays all saved movies on the page */
 function render(){
 
     const movies = JSON.parse(localStorage.getItem("movies") || "[]")
     const list = document.getElementById("list")
 
-    // convert movie objects into HTML
-    list.innerHTML = movies.map(m => `
+    list.innerHTML = movies.map((m,i) => `
         <div class="movie">
         ${m.title} (${m.year}) - ${m.genre}, Rating: 
-        <span class="rating">${"★".repeat(m.rating)}</span>
+        <span class="rating">${getStars(m.rating)}</span>
+        <button class="deleteBtn" onclick="deleteMovie(${i})">Delete</button>
         </div>
     `).join("")
 }
