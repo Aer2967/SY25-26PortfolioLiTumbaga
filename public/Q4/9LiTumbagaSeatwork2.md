@@ -96,11 +96,6 @@ Using the position: absolute value, the box's position and size is specified wit
 
 The notice appears on top of the content box because z-values determine how "high" the elements would show on top of your output. For example, assigning a z-index value to .header with 1 and assigning a z-index value to .sidebar with 2 will make the side bar appear on top of the header. In this case, since notice was the only one to have a z-index in its css, it's put above everything else, which leads to it appearing on top of the content.
 
-- Challenge: 
-    * What changes that you have to do on the code that will position .notice box on the top right corner of the .content box? Please write the code on paper as well (both html and css on the part of .notice and .content).
-    * Try to change the position of .content to relative then to fixed. What do you observed each time?
-    * What do you observe on about the effect of z-index on .notice and .content boxes?
-
 3. Please answer the following reflection questions (15 minutes)
 
     a. Could you summarize the differences between the CSS position values (static, relative, absolute, fixed)? 
