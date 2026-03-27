@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Transition and Animation Exercises</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="Sample Code to implement transform and transition">
+    <meta name="author" content="A.L. Mendoza & M.Tarcelo">
+    <meta name="revised" content="12/04/2022">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+			#deck{
+				width: 50vw;
+				height: 50vh;
+				position: relative;
+				margin: 0 auto 110px;
+				border: 3px solid black;
+				padding: 40px;
+			}
+			#deck div{
+				border: 3px solid black;
+				height: 30vh;
+				width: 20vw;
+				position: absolute;
+				left: 250px;
+				top: 100px;
+				background-color: white;
+				color: red;
+				font-size: 2em;
+				padding: 5px;
+				font-weight: bold;
+				transition: all  2s;
+				transform-origin: bottom left;
+			}
+			
+			#deck div:first-child:hover{
+				background-color: yellow;
+			}
+
+			#deck:hover div:nth-child(1) {
+				-webkit-transform: rotate(45deg);
+				transform: rotate(-45deg);
+			}
+
+			#deck div:nth-child(2):hover{
+				background-color: orange;
+			}
+			#deck:hover div:nth-child(2) {
+				-webkit-transform: rotate(45deg);
+				transform: rotate(-25deg);
+			}
+			
+			#deck div:nth-child(3):hover{
+				background-color: green;
+			}
+
+			#deck:hover div:nth-child(3) {
+				-webkit-transform: rotate(45deg);
+				transform: rotate(-5deg);
+			}
+
+			#deck div:nth-child(4):hover{
+				background-color: blue;
+			}
+
+			#deck:hover div:nth-child(4) {
+				-webkit-transform: rotate(45deg);
+				transform: rotate(10deg);
+			}
+
+			#deck div:nth-child(5):hover{
+				background-color: violet;
+				-ms-transform: translate(100px, 50px); 
+				-webkit-transform: translate(100px, 50px); 
+				transform: translate(100px, 50px);-ms-transform: rotate(45deg);
+				-webkit-transform: rotate(45deg);
+				transform: rotate(20deg);
+			}
+
+			#deck:hover div:nth-child(5) {
+				-webkit-transform: rotate(45deg);
+				transform: rotate(20deg);
+			}
+
+			a {
+				text-decoration: none;
+			}
+			button {
+				display: block;
+				width: 25vw;
+				padding: 5px;
+				margin: 10px auto;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="deck">
+			<div> &#9824;</div>
+			<div> &#127808;</div>
+			<div>	&#9670;</div>
+			<div>	&#10084;</div>
+      <div> &#127183;</div>
+		</div>
+    <a href="../index.html"><button> Click me for Home</button> </a>
+	</body>
+</html>
