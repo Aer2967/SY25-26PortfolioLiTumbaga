@@ -107,15 +107,15 @@
       </tr>
       <tr>
         <td> 8 </td> 
-        <td> CSS (.point) </td> 
-        <td> The point element had no positioning, so left and top values did not take effect. </td>
-        <td> Added position: absolute; to the .point class. </td>
+        <td> CSS (nav) </td> 
+        <td> The navigation bar was not fixed at the top, so it would scroll with the page instead of staying visible. </td>
+        <td> Added position: fixed; top: 0; left: 0; to the nav so it stays at the top of the browser window. </td>
       </tr>
       <tr>
         <td> 9 </td> 
-        <td> CSS (nav a :hover) </td> 
-        <td> There was an extra space in the selector, causing the hover effect not to work. </td>
-        <td> Changed nav a :hover to nav a:hover. </td>
+        <td> CSS (nav layout + hover effect) </td> 
+        <td> Navigation links were stacking vertically instead of staying in one line, and the hover effect was not working due to incorrect selector syntax. </td> 
+        <td> Changed display: block; to display: inline-block; so links stay in one line, and fixed nav a :hover to nav a:hover so hover styling works properly. </td>
       </tr>
       <tr>
         <td> 10 </td> 
